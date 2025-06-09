@@ -1,0 +1,2 @@
+# NixOs
+Personal Nixos desktop
