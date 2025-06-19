@@ -1,16 +1,29 @@
+# configuration.nix
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
+  imports =
+    [
+      ./hardware-configuration.nix
+      ./modules/drivers.nix
+      ./modules/programs.nix
+    ];
 
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "nixos";
+  boot.kernelParams = [
+    "quiet"
+  ];
+
+  # Enable networking
   networking.networkmanager.enable = true;
 
+  # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
+  # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
@@ -24,56 +37,50 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  # Enable X server if you're not exclusively using Wayland
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.xkb.layout = "de";
-  console.keyMap = "de";
-  services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
 
+  # Enable the GNOME Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "de";
+    variant = "";
+  };
+
+  # Configure console keymap
+  console.keyMap = "de";
+
+  # Enable CUPS for printing
   services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
+  # Enable sound with PipeWire
+  services.pulseaudio.enable = false; # Disable PulseAudio if using PipeWire
   security.rtkit.enable = true;
+
+  # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # jack.enable = true; # Uncomment if you need JACK applications
   };
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    open = false;
-    nvidiaSettings = true;
-  };
-
-  hardware.graphics.enable = true;
-
+  # User account definition
+  # Note: The packages previously listed here are now in programs.nix
   users.users.voldy = {
     isNormalUser = true;
     description = "Piyush Singh";
     extraGroups = [ "networkmanager" "wheel" ];
+    # packages are now handled in modules/programs.nix or via home-manager
   };
 
-  # Configure Home Manager to use the system's Nixpkgs instance.
-  # This ensures it inherits settings like `allowUnfree = true;`.
-  home-manager.useGlobalPkgs = true;
-
-  # Note: Your Home Manager configuration for the user 'voldy'
-  # (e.g., home-manager.users.voldy = { ... };), where vscode is likely listed
-  # in home.packages, might be in this file or imported from another file.
-
-  programs.firefox.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    git
-    pciutils
-    tree
-    python312
-    python312Packages.pip
-  ];
-
-  system.stateVersion = "25.05";
+  # System state version
+  system.stateVersion = "25.05"; # Keep this consistent with your NixOS version
 }
