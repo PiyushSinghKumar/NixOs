@@ -7,26 +7,28 @@
 
   # System-wide packages you want installed
   environment.systemPackages = with pkgs; [
-    # gnome-tweaks
-    # adwaita-icon-theme
-    # Development
-    vscode # Microsoft Visual Studio Code
-    python3 # Python 3 environment
+    adwaita-icon-theme
+    vscode
+    python3
     brave
-
-    # Communication
-    discord # Discord chat client
-
-    # Gaming
-    # lutris # Lutris game manager
-
-    # Existing user-specific packages (moved here for simplicity)
-    kdePackages.kate # KDE text editor
+    discord
+    lutris
+    kdePackages.kate
     btop
     htop
+    mangohud
+    onlyoffice-desktopeditors
   ];
 
   # Enable Firefox with its specific NixOS module
   programs.firefox.enable = true;
-  # programs.steam.enable = true;
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+
+  programs.gamemode.enable = true;
+
+  environment.variables = {
+    MANGOHUD = "1";
+    MANGOHUD_DLSYM = "1";
+  };
 }
