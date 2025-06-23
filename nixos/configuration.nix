@@ -64,6 +64,9 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  # Enable thermald for better thermal management on laptops, especially with AMD CPUs.
+  services.thermald.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
