@@ -36,9 +36,8 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Optional: For better AMD Vulkan and VAAPI (hardware video acceleration)
-  # THE ENTIRE BLOCK BELOW IS BEING REMOVED/COMMENTED OUT
-  # hardware.video.mesa.enable = true;
-  # hardware.video.mesa.drivers = [ "amdgpu" ];
-  # hardware.video.enableUnifiedMemory = true; # REMOVED/COMMENTED OUT in previous step
+  # NOTE: Vulkan and VA-API (for hardware video acceleration) are automatically
+  # configured for both AMD and NVIDIA by the options enabled above.
+  # `hardware.graphics.enable` handles Mesa/AMD drivers, and `hardware.nvidia`
+  # handles the proprietary NVIDIA components.
 }
