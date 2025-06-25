@@ -10,12 +10,13 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "quiet" ];
+  };
+
   networking.hostName = "nixos";
-  boot.kernelParams = [
-    "quiet"
-  ];
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -37,42 +38,47 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Enable X server if you're not exclusively using Wayland
-  services.xserver.enable = true;
+  services = {
+    # Enable X server if you're not exclusively using Wayland
+    xserver = {
+      enable = true;
+      # Configure keymap in X11
+      xkb = {
+        layout = "de";
+        variant = "";
+      };
+    };
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+    # Enable the Plasma 6 Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "de";
-    variant = "";
+    # Enable CUPS for printing
+    printing.enable = true;
+
+    # Enable sound with PipeWire
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # jack.enable = true; # Uncomment if you need JACK applications
+    };
+    pulseaudio.enable = false; # Disable PulseAudio if using PipeWire
+
+    # Enable thermald for better thermal management on laptops, especially with AMD CPUs.
+    thermald.enable = true;
   };
 
   # Configure console keymap
   console.keyMap = "de";
 
-  # Enable CUPS for printing
-  services.printing.enable = true;
-
-  # Enable sound with PipeWire
-  services.pulseaudio.enable = false; # Disable PulseAudio if using PipeWire
   security.rtkit.enable = true;
 
   # Enable Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  # Enable thermald for better thermal management on laptops, especially with AMD CPUs.
-  services.thermald.enable = true;
-
-  services.pipewire = {
+  hardware.bluetooth = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # jack.enable = true; # Uncomment if you need JACK applications
+    powerOnBoot = true;
   };
 
   # User account definition
