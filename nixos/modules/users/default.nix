@@ -1,10 +1,8 @@
 # /etc/nixos/modules/users/default.nix
-{ config, pkgs, ... }:
+#
+# This module groups all user-related configurations, including
+# system-level account definitions and user-specific Home Manager settings.
 
 {
-  users.users.voldy = {
-    isNormalUser = true;
-    description = "Piyush Singh";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
+  imports = [ ./accounts.nix ./home.nix ];
 }

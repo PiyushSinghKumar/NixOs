@@ -1,14 +1,13 @@
 # /etc/nixos/modules/programs/nixpkgs.nix
-{ config, pkgs, ... }:
+{ inputs, ... }:
 
-# Fetch the latest nixos-unstable channel as a package set.
-let
-  unstable-tarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  unstable = import unstable-tarball { config = config.nixpkgs.config; };
-in
 {
   nixpkgs.config.allowUnfree = true;
 
-  # Use an overlay to replace the stable 'ollama' with the one from unstable.
-  nixpkgs.overlays = [ (final: prev: { ollama = unstable.ollama; }) ];
+  # Use an overlay to get ollama from the unstable channel defined in the flake.
+  nixpkgs.overlays = [
+    (final: prev: {
+      ollama = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.ollama;
+    })
+  ];
 }
