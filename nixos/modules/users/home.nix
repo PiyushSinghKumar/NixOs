@@ -2,27 +2,28 @@
 { pkgs, ... }:
 
 {
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.voldy = {
+      home.stateVersion = "25.05";
 
-  home-manager.users.voldy = {
-    home.stateVersion = "25.05";
+      # User-specific packages.
+      home.packages = with pkgs; [
+        brave
+        discord
+        kdePackages.kate
+        lutris
+        onlyoffice-desktopeditors
+        vscode
+        unstable.zed-editor # Pulled from nixpkgs-unstable via our overlay
+      ];
 
-    # User-specific packages.
-    home.packages = with pkgs; [
-      brave
-      discord
-      kdePackages.kate
-      lutris
-      onlyoffice-desktopeditors
-      vscode
-      zed-editor
-    ];
-
-    programs.git = {
-      enable = true;
-      userName = "Piyush Kumar Singh";
-      userEmail = "piyushkumarsingh.nmims@gmail.com";
+      programs.git = {
+        enable = true;
+        userName = "Piyush Kumar Singh";
+        userEmail = "piyushkumarsingh.nmims@gmail.com";
+      };
     };
   };
 }

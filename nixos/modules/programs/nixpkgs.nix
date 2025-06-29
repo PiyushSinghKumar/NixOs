@@ -7,7 +7,7 @@
   # Use an overlay to get ollama from the unstable channel defined in the flake.
   nixpkgs.overlays = [
     (final: prev: {
-      ollama = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.ollama;
+      inherit (inputs.nixpkgs-unstable.legacyPackages.${prev.system}) ollama;
     })
   ];
 }
