@@ -10,17 +10,17 @@
     # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs"; # Ensures Home Manager uses the same nixpkgs
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; }; # Pass inputs to all modules
+      specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        home-manager.nixosModules.home-manager # Activate the Home Manager module
+        home-manager.nixosModules.home-manager
       ];
     };
   };

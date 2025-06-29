@@ -2,6 +2,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./config.nix
+    ./overlays.nix
+  ];
+
   # Bootloader.
   boot = {
     loader.systemd-boot.enable = true;
