@@ -12,7 +12,6 @@
       home.packages = with pkgs; [
         brave
         discord
-        kdePackages.kate
         lutris
         onlyoffice-desktopeditors
         vscode

@@ -1,5 +1,5 @@
 # /etc/nixos/modules/users/accounts.nix
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   users.users.voldy = {

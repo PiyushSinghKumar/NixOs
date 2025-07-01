@@ -1,5 +1,5 @@
 # /etc/nixos/modules/system/default.nix
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [

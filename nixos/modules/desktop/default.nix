@@ -1,5 +1,5 @@
 # /etc/nixos/modules/desktop/default.nix
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services = {
@@ -31,4 +31,9 @@
     enable = true;
     powerOnBoot = true;
   };
+
+  # Exclude default applications from the Plasma desktop environment.
+  environment.plasma6.excludePackages = with pkgs; [
+    kdePackages.kate
+  ];
 }
