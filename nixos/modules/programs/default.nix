@@ -4,7 +4,6 @@
 
 {
   imports = [
-    ./nixpkgs.nix
     ./packages.nix
     ./services.nix
   ];
