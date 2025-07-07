@@ -8,6 +8,7 @@
       let
         unstable-pkgs = import inputs.nixpkgs-unstable {
           system = prev.system;
+          config.allowUnfree = true;
         };
       in
       {

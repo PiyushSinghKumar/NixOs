@@ -9,13 +9,13 @@
       home.stateVersion = "25.05";
 
       # User-specific packages.
-      home.packages = with pkgs; [
+      home.packages = with pkgs.unstable; [
         brave
         discord
         lutris
         onlyoffice-desktopeditors
         vscode
-        unstable.zed-editor # Pulled from nixpkgs-unstable via our overlay
+        zed-editor
       ];
 
       programs.git = {
