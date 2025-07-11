@@ -12,6 +12,7 @@
       home.packages = with pkgs.unstable; [
         brave
         discord
+        code-cursor
         lutris
         onlyoffice-desktopeditors
         vscode
