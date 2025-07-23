@@ -1,4 +1,4 @@
-# /etc/nixos/modules/system/config.nix
+# Configures Nix and Nixpkgs settings (experimental features, allowUnfree, etc.).
 { ... }:
 
 {

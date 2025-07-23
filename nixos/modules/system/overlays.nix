@@ -1,5 +1,5 @@
+# Configures Nixpkgs overlays (unstable packages, custom overlays, etc.).
 # /etc/nixos/modules/system/overlays.nix
-# This module defines an overlay to add packages from nixpkgs-unstable.
 { inputs, ... }:
 
 {
@@ -7,16 +7,14 @@
     (final: prev:
       let
         unstable-pkgs = import inputs.nixpkgs-unstable {
-          system = prev.system;
+          inherit (prev) system;
           config.allowUnfree = true;
+          config.allowUnsupportedSystem = true;
         };
       in
       {
+        inherit (unstable-pkgs) ollama kdePackages sddm;
         unstable = unstable-pkgs;
-        ollama = unstable-pkgs.ollama;
-
-        kdePackages = unstable-pkgs.kdePackages;
-        sddm = unstable-pkgs.sddm;
       })
   ];
 }

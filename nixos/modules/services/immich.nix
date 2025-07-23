@@ -1,3 +1,4 @@
+# Configures the Immich service (photo and video backup server).
 {
   services.immich = {
     enable = true;

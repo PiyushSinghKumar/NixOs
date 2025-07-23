@@ -1,4 +1,4 @@
-# /etc/nixos/modules/users/accounts.nix
+# Configures user account definitions.
 { ... }:
 
 {

@@ -1,17 +1,15 @@
-# /etc/nixos/modules/programs/services.nix
+# Configures user-facing programs (not system services).
 { ... }:
 
 {
   programs = {
-    firefox.enable = true;
+    firefox.enable = false;
     steam = {
-      enable = true;
-      gamescopeSession.enable = true;
+      enable = false;
+      gamescopeSession.enable = false;
     };
-    gamemode.enable = true;
+    gamemode.enable = false;
   };
-
-  services.ollama.enable = true;
 
   # environment.variables = {
   #   MANGOHUD = "1";

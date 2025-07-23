@@ -5,7 +5,8 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./modules/drivers
+      ./modules/hardware
+      ./modules/services
       ./modules/system
       ./modules/desktop
       ./modules/users

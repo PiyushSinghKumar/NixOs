@@ -1,3 +1,4 @@
+# Entry point for all system-level configuration (bootloader, locale, overlays, etc.).
 # /etc/nixos/modules/system/default.nix
 { ... }:
 

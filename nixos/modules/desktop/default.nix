@@ -1,3 +1,4 @@
+# Configures the desktop environment, display manager, printing, and audio settings.
 # /etc/nixos/modules/desktop/default.nix
 { pkgs, ... }:
 
@@ -22,15 +23,9 @@
       pulse.enable = true;
       jack.enable = true;
     };
-    thermald.enable = true;
   };
 
   security.rtkit.enable = true;
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
 
   # Exclude default applications from the Plasma desktop environment.
   environment.plasma6.excludePackages = with pkgs; [

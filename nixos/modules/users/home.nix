@@ -1,4 +1,4 @@
-# /etc/nixos/modules/users/home.nix
+# Configures Home Manager user settings for 'voldy'.
 { pkgs, ... }:
 
 {
@@ -11,10 +11,8 @@
       # User-specific packages.
       home.packages = with pkgs.unstable; [
         brave
-        discord
         code-cursor
-        lutris
-        onlyoffice-desktopeditors
+        libreoffice-qt6-fresh
         vscode
         zed-editor
       ];

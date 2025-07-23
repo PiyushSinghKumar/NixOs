@@ -1,4 +1,4 @@
-# /etc/nixos/modules/programs/packages.nix
+# Configures system-wide user-facing packages.
 { pkgs, ... }:
 
 {
@@ -10,7 +10,6 @@
     htop
     nixpkgs-fmt
     python3
-    statix
     tmux
   ];
 }
